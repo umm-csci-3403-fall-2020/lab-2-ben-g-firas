@@ -4,52 +4,39 @@
 
 #include "disemvowel.h"
 
-bool check_vowel(char *str)
-{
-  char *v;
-  if (v == 'a' || v == 'A' || v == 'e' || v == 'E' || v == 'i' || v == 'i' || v == 'o' || v == 'O' || v == 'u' || v == 'U')
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+bool check_vowel(char v) {
+  bool output = false;
+  output = (v == 'a' || v == 'A' || v == 'e' || v == 'E' || v == 'i' || v == 'I' || v == 'o' || v == 'O' || v == 'u' || v == 'U');
+  return output;
 }
 
-int getNewString(char *str, int length)
-{
-  int n = 0;
+int getDisemvowelSize(char *str) {
   int i;
-  for (i = 0; i < length; i++)
-  {
-    if (check_vowel(str[i]) == false)
-    {
+  int n = 0;
+  for (i = 0; i < strlen(str); i++) {
+    if (!check_vowel(str[i])) {
       n++;
     }
   }
+  return n;
 }
 
-char *disemvowel(char *str)
-{
+char *disemvowel(char *str) {
   int length = strlen(str);
-  char *final;
+  char* final;
   int i;
-  int pos;
-  int newString = getNewString(str, length);
-  final = (char *)calloc(newString + 1, sizeof(char));
+  int pos = 0;
+  int disemvowelSize = getDisemvowelSize(str);
+  final = (char *)calloc(disemvowelSize + 1, sizeof(char));
 
-  for (i = 0; i < length; i++)
-  {
-    if (check_vowel(str[i]) == false)
-    {
-      final[pos] == str[i];
+  for (i = 0; i < length; i++) {
+    if (!check_vowel(str[i])) {
+      final[pos] = str[i];
       pos++;
     }
 
-    // Add null to array as required
-    final[newString] = '\0';
-
-    return final;
+    // Add null terminator to array
+    final[disemvowelSize] = '\0';
   }
+  return final;
 }

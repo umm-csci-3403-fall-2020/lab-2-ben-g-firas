@@ -27,7 +27,7 @@ TEST(Disemvowel, HandleMorrisMinnesota)
 {
   char *final = disemvowel((char *)"Morris, Minnesota");
   ASSERT_STREQ("Mrrs, Mnnst",
-               disemvowel(final));
+               final);
   free(final);
 }
 
